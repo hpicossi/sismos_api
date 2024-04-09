@@ -6,6 +6,15 @@ class FeaturesController < ApplicationController
     render json: @features
   end
 
+  def create
+    @feature = Feature.new(feature_params)
+    if @feature.save
+      render json: @feature, status: :created
+    else
+      render json: { errors: @feature.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   def fetch_earthquake_data
     url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson'
     response = HTTParty.get(url)
@@ -35,6 +44,10 @@ class FeaturesController < ApplicationController
       )
       feature.save
     end
+  end
+
+  def feature_params
+    params.require(:feature).permit(:external_id, :magnitude, :place, :time, :tsunami, :mag_type, :title, :longitude, :latitude)
   end
 end
 
