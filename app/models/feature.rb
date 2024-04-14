@@ -5,7 +5,7 @@ class Feature < ApplicationRecord
     validates :place, presence: true
   
     # Validación del formato de fecha y hora
-    validates :time, presence: true, format: { with: /\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\z/ }
+    validates :time, presence: true
   
     # Validación condicional para el campo tsunami
     validates :tsunami, presence: true, if: -> { magnitude.present? && magnitude > 7 }

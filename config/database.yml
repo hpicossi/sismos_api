@@ -1,4 +1,3 @@
-
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -10,15 +9,17 @@ default: &default
 development:
   <<: *default
   database: sismos_api_development
+  username: postgres
+  password: hilario1
 
 test:
   <<: *default
   database: sismos_api_test
-  username: <%= ENV['POSTGRES_USER']  %>
-  password: <%= ENV['POSTGRES_PASSWORD']  %>
+  username: postgres
+  password: hilario1
 
 production:
   <<: *default
   database: sismos_api_production
-  username: <%= ENV['POSTGRES_USER']  %>
-  password: <%= ENV['POSTGRES_PASSWORD']  %>
+  username: postgres
+  password: hilario1
